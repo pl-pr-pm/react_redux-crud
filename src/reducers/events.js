@@ -2,6 +2,7 @@ import _ from "lodash";
 
 import { READ_EVENTS } from "../actions";
 
+// events -> state.events
 export default (events = {}, action) => {
   switch (action.type) {
     case READ_EVENTS:
