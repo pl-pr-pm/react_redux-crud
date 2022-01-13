@@ -29,13 +29,15 @@ class EventsNew extends React.Component {
   }
 
   async onSubmit(values) {
-    console.log(postEvent)
+    console.log(postEvent);
     await this.props.postEvent(values);
     this.props.history.push("/");
   }
 
   render() {
-    const { handleSubmit } = this.props;
+    // reduxFormからpropsで渡される
+    // formがsubmitされた時に実行されるべき関数
+    const { handleSubmit, pristine, submitting } = this.props;
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
@@ -57,7 +59,12 @@ class EventsNew extends React.Component {
           />
         </div>
         <div>
-          <input type="submit" value="Submit" disabled={false} />
+          <input
+            type="submit"
+            value="Submit"
+            // 入力値が空もしくは送信済みの時非活性化する
+            disabled={pristine || submitting}
+          />
           <Link to="/">Cancel</Link>
         </div>
       </form>
